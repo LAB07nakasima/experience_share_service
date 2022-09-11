@@ -2,5 +2,9 @@
   "devDependencies": {
     "laravel-vite-plugin": "^0.5.4",
     "vite": "^3.0.9"
+  },
+
+  "scripts": {
+      "heroku-postbuild": "npm run production" 
   }
 }
