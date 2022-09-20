@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FollowUser;
 
 
 class User extends Authenticatable
@@ -45,17 +46,28 @@ class User extends Authenticatable
         return $this->hasMany(User::class);
     }
 
-    // フォロー関係
-    // フォロワー->フォロー
-    public function followUsers()
+    // フォロー
+    public function followings()
     {
-        return $this->belongsToMany(User::class, 'follow_users', 'followed_user_id', 'following_user_id');
+      return $this->belongsToMany(self::class, "follows_user", "followed_user_id", "following_user_id")->withTimestamps();
     }
 
-    // フォロー->フォロワー
-    public function follows()
+    public function followers()
     {
-        return $this->belongsToMany(User::class, 'follow_users', 'following_user_id', 'followed_user_id');
+      return $this->belongsToMany(self::class, "follows_user", "following_user_id", "followed_user_id")->withTimestamps();
     }
+
+    // フォロワー->フォロー
+    // public function followings()
+    // {
+    //     return $this->belongsToMany(self::class, 'follow_users', 'followed_user_id', 'following_user_id')->withTimestamps();
+    //     // belongsToMany(紐付けるモデル,結合テーブル名,リレーションを定義しているモデルの外部キー名,結合するモデルの外部キー名)
+    // }
+
+    // フォロー->フォロワー
+    // public function followers()
+    // {
+    //     return $this->belongsToMany(self::class, 'follow_users', 'following_user_id', 'followed_user_id')->withTimestamps();
+    // }
 
 }

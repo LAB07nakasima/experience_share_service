@@ -5,6 +5,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowUserController;
+use App\Models\FollowUser;
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +29,17 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('post/{post}/favorites', [FavoriteController::class, 'store'])->name('favorites');
     Route::post('post/{post}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');
 
+    // フォロー機能 test
+    // Route::post('/users/{user}/follow', [FollowUserController::class,'follow']);
+    // Route::post('/users/{user}/unfollow', [FollowUserController::class, 'unfollow']);
+
+    Route::post('user/{user}/follow',[FollowUserController::class, 'store'])->name('follow');
+    Route::post('user/{user}/unfollow',[FollowUserController::class, 'destroy'])->name('unfollow');
+
 });
 
+// カレンダー機能
+Route::post('/calendar',[CalendarController::class, 'scheduleAdd'])->name('calendar');
 
 Route::resource('/mypage', UserController::class);
 

@@ -63,7 +63,7 @@
                                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                             <circle cx="12" cy="12" r="3"></circle>
                                         </svg> --}}
-                                        いいね数{{ $post->users()->count() }}
+                                        {{ $post->users()->count() }}
                                     </span>
                                     <span class="text-gray-400 inline-flex items-center leading-none text-sm">
                                     <form action="{{ route('comment.show', ['post_id' => $post->id]) }}" method="GET" class="text-left">
@@ -73,9 +73,9 @@
                                             </svg>
                                         </button>
                                     </form>
-                                    コメント数
+
                                     </span>
-                                    <!-- 🔽 条件分岐でログインしているユーザが投稿したtweetのみ編集ボタンと削除ボタンが表示される -->
+                                    <!-- 🔽 条件分岐でログインしているユーザが投稿したもののみ編集ボタンと削除ボタンが表示される -->
                                     @if ($post->user_id === Auth::user()->id)
                                     <!-- 更新ボタン -->
                                     <form action="{{ route('post.edit',$post->id) }}" method="GET" class="text-left">
@@ -114,13 +114,57 @@
 
                                 </div>
 
-                                <a class="inline-flex items-center">
-                                    <img alt="blog" src="https://dummyimage.com/104x104" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
-                                    <span class="flex-grow flex flex-col pl-4">
-                                    <span class="title-font font-medium text-gray-900">{{ $post->user->name }}</span>
-                                    <span class="text-gray-400 text-xs tracking-widest mt-0.5">UI DEVELOPER(フォロワーだったらフォロワーとか表示させたい)</span>
-                                    </span>
-                                </a>
+                                {{-- <a class="inline-flex items-center"> --}}
+                                    {{-- <img alt="blog" src="https://dummyimage.com/104x104" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                                    <span class="flex-grow flex flex-col pl-4"> --}}
+                                    {{-- <span class="title-font font-medium text-gray-900">{{ $post->user->name }}</span>
+                                    <span class="text-gray-400 text-xs tracking-widest mt-0.5">UI DEVELOPER(フォロワーだったらフォロワーとか表示させたい)</span> --}}
+                                    {{-- </span>
+                                </a> --}}
+
+                                {{-- フォロー関係のUI --}}
+                                <div>
+                                    <p class="text-left text-grey-dark">ユーザー名：{{$post->user->name}}</p>
+                                    <!-- follow 状態で条件分岐 -->
+                                    {{-- 自分の投稿じゃなければフォロー関係表示する --}}
+                                    @if ($post->user_id !== Auth::user()->id)
+                                    @if(Auth::user()->followings()->where('users.id', $post->user->id)->exists())
+                                    <!-- unfollow ボタン -->
+                                    <form action="{{ route('unfollow', $post->user) }}" method="POST" class="text-left">
+                                    @csrf
+                                    {{-- <button type="submit" class="flex mr-2 ml-2 text-sm hover:bg-gray-200 hover:shadow-none text-red py-1 px-2 focus:outline-none focus:shadow-outline"> --}}
+
+                                    <button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                            フォロー解除
+                                        </span>
+                                    </button>
+
+                                        {{-- <svg class="h-6 w-6 text-red-500" fill="yellow" viewBox="0 0 24 24" stroke="red">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
+                                        </svg> --}}
+                                        {{ $post->user->followers()->count() }}
+
+                                    </form>
+                                    @else
+                                    <!-- follow ボタン -->
+                                    <form action="{{ route('follow', $post->user) }}" method="POST" class="text-left">
+                                    @csrf
+                                        {{-- <button type="submit" class="flex mr-2 ml-2 text-sm hover:bg-gray-200 hover:shadow-none text-black py-1 px-2 focus:outline-none focus:shadow-outline">
+                                            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="black">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
+                                            </svg> --}}
+
+                                        <button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                フォロー
+                                            </span>
+                                        </button>
+                                        {{ $post->user->followers()->count() }}
+                                    </form>
+                                    @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         @endforeach
