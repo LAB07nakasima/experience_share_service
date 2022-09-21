@@ -39,7 +39,9 @@ Route::group(['middleware' => 'auth'], function (){
 });
 
 // カレンダー機能
-Route::post('/calendar',[CalendarController::class, 'scheduleAdd'])->name('calendar');
+Route::get('/test',[CalendarController::class, 'scheduleAdd'])->name('test');
+// Route::post('/calendar',[CalendarController::class, 'scheduleAdd'])->name('calendar');
+
 
 Route::resource('/mypage', UserController::class);
 
