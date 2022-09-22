@@ -4,8 +4,12 @@ import Alpine from 'alpinejs';
 
 console.log('app.js');
 
-window.axios = require("axios");
-require("./calendar");
+// 非同期通信
+// window.axios = require("axios");
+// require("./calendar");
+
+import axios from 'axios';
+import './calendar';
 
 // window.Alpine = Alpine;
 // Alpine.start();

@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('test')" :active="request()->routeIs('test')">
+                    <x-nav-link :href="route('test.index')" :active="request()->routeIs('test.index')">
                         {{ __('カレンダー') }}
                     </x-nav-link>
                 </div>

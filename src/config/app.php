@@ -196,7 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        // 'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider'
     ],
 
     /*

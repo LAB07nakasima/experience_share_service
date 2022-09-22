@@ -19,8 +19,13 @@
     {{-- CSSファイルの読み込み --}}
     <link rel="stylesheet" href="/css/style.css">
     {{--  <link rel=“stylesheet” href=“{{ asset(‘css/create.style.css’) }}“> --}}
-    {{--  --}}
+    {{-- フルカレンダーの機能？？必要か微妙 --}}
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.3/main.global.min.js"></script>
+    {{-- jsファイルの読み込み --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    {{-- テスト用だから後で消す --}}
+    <script src="{{ asset('js/calendar.js') }}"></script>
 
     <script>
 
@@ -88,17 +93,31 @@
                 // 入力ダイアログ
                 const eventName = prompt("予定を入力してください");
 
-                if (eventName) {
-                    // イベントの追加
-                    calendar.addEvent({
-                        title: eventName,
-                        start: info.start,
-                        end: info.end,
-                        allDay: true,
-                    });
-                }
+                // if (eventName) {
+                //     // Laravelの登録処理の呼び出し
+                //     axios
+                //         .post("/test/user.id", {
+                //             start_date: info.start.valueOf(),
+                //             end_date: info.end.valueOf(),
+                //             schedule: eventName,
+                //         })
+                //         .then(() => {
+                //             // イベントの追加
+                //             calendar.addEvent({
+                //                 // $jsondata.title
+                //                 // $jsondata.start
+                //                 title: eventName,
+                //                 start: info.start,
+                //                 end: info.end,
+                //                 allDay: true,
+                //             });
+                //         })
+                //         .catch(() => {
+                //             // バリデーションエラーなど
+                //             alert("登録に失敗しました");
+                //         });
+                // }
             },
-
         });
 
             // イベントを押すとモーダルウィンドウが開く
@@ -110,12 +129,18 @@
 
         calendar.render();
         // });
+    console.log(title, user, start);
+
     });
 
     // 予定の取得
     function getEventDates() {
 
         var specialDay = [
+            // $json.dateでjsondateが帰ってくるはず。(オブジェクト型)
+            // jsondate.map(title, start,end){}
+            //calendar.titleでtitleが取れるようになってるはず
+            // title: calendar.title ,
             {
                 title: 'URL埋め込みテスト',
                 start: '2022-09-28',
@@ -137,11 +162,17 @@
     };
 
 
+    // ライブラリの動作テスト
+    // window.Laravel = {};
 
+
+    // console.log(Laravel.array);
     </script>
   </head>
   <body>
     {{-- ここでcalendarの表示 --}}
     <div id='calendar'></div>
+
+    {{-- @include ('footer') --}}
   </body>
 </html>
