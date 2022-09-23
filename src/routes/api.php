@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/test/index',[CalendarController::class, 'index'])->name('test.index');
+Route::post('/test',[CalendarController::class, 'scheduleAdd'])->name('test.add');

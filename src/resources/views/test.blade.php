@@ -129,36 +129,54 @@
 
         calendar.render();
         // });
-    console.log(title, user, start);
+    // console.log(end);
 
     });
 
     // 予定の取得
     function getEventDates() {
 
-        var specialDay = [
-            // $json.dateでjsondateが帰ってくるはず。(オブジェクト型)
-            // jsondate.map(title, start,end){}
-            //calendar.titleでtitleが取れるようになってるはず
-            // title: calendar.title ,
-            {
-                title: 'URL埋め込みテスト',
-                start: '2022-09-28',
-                url: 'https://gsacademy.jp/',
-                className: 'テスト',
-                specialDay: '2022-09-28'
-            },
-            {
-            // 指定日付セル内の表示内容
-            title: '卒制提出日',
-                // 指定日付
-            start: '2022-10-04',
-                //カラーの表示
-            color: '#ff9ff89'
-            },
-        ];
+        // var specialDay = [
+        //     // $json.dateでjsondateが帰ってくるはず。(オブジェクト型)
+        //     // jsondate.map(title, start,end){}
+        //     //calendar.titleでtitleが取れるようになってるはず
+        //     // title: calendar.title ,
+        //     {
+        //         title: 'URL埋め込みテスト',
+        //         start: '2022-09-28',
+        //         url: 'https://gsacademy.jp/',
+        //         className: 'テスト',
+        //         specialDay: '2022-09-28'
+        //     },
+        //     {
+        //         // 指定日付セル内の表示内容
+        //         title: '卒制提出日',
+        //             // 指定日付
+        //         start: '2022-10-04',
+        //             //カラーの表示
+        //         color: '#ff9ff89'
+        //     },
+        //     // {
+        //     //     title: window.title,
+        //     //     start: window.start,
+        //     //     end: window.end
+        //     // },
+        //     {
+        //         title: title,
+        //         start: start,
+        //         end: end
+        //     },
+        // ];
+
+        const data = {specialDay: specialDay};
+
+        // const ary = data.specialDay.map(function(value){
+        //     return {title:value.schedule,start:value.start_date,end:value.end_date};
+        // })
+
+        console.log(data.specialDay);
             // eventDates.push(specialDay);
-            return specialDay;
+            return data.specialDay;
     };
 
 
@@ -166,13 +184,53 @@
     // window.Laravel = {};
 
 
+    $(document).ready(function(){
+
+     console.log(window.title);
+     console.log(window.start);
+     console.log(window.end);
+
+ })
+
     // console.log(Laravel.array);
     </script>
   </head>
   <body>
-    {{-- ここでcalendarの表示 --}}
-    <div id='calendar'></div>
+    <x-app-layout>
+        <x-slot name="header">
+          <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('コメント') }}
+          </h2>
+        </x-slot>
 
-    {{-- @include ('footer') --}}
+        {{-- ここでcalendarの表示 --}}
+        <div class="" id='calendar'></div>
+        <div class="w-1/2 max-w-xs">
+            <div class="bg-gray-100">
+                <form method="POST" action="{{ route('test.add') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">予定を入力する</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="schedule"
+                                name="schedule"
+                                {{-- value="{{ old('schedule_title') }}" --}}
+                                type="text">
+
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">開始日</label>
+                            <input type="date" name="start_date">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">終了日</label>
+                            <input type="date" name="end_date">
+                            {{-- name: フォームの名前  value: 送信される値 --}}
+                            <button type="submit" value="登録">カレンダーに登録</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @include ('footer')
+    </x-app-layout>
   </body>
 </html>

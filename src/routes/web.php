@@ -40,8 +40,8 @@ Route::group(['middleware' => 'auth'], function (){
 
 // カレンダー機能
 // Route::post('/test',[CalendarController::class, 'index'])->name('test');
-Route::get('/test',[CalendarController::class, 'index'])->name('test');
-// Route::post('/calendar',[CalendarController::class, 'scheduleAdd'])->name('calendar');
+Route::get('/test',[CalendarController::class, 'index'])->name('test.index');
+Route::post('/test',[CalendarController::class, 'scheduleAdd'])->name('test.add');
 
 
 Route::resource('/mypage', UserController::class);

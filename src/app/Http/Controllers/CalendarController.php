@@ -8,21 +8,44 @@ use App\Models\Calendar;
 use JavaScript;
 use Illuminate\Support\Facades\View;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class CalendarController extends Controller
 {
     public function index()
     {
-        JavaScript::put([
-            'title' => 'bar',
-            'user' => '1',
-            'start' => 29
-        ]);
+        // これでbladeへJSが渡せる
+        // JavaScript::put([
+        //     'title' => 'bar',
+        //     'user' => '1',
+        //     'start' => 29
+        // ]);
+
+        // return View::make('test');
+
+        $user = Auth::user();
+        $user_calender = $user->calenders()->get();
+        $schedule =[];
+        
+         foreach($user_calender as $data){
+            $schedule[]=[
+                    'title' => $data->schedule,
+                    'start' => $data->start_date,
+                    'end' => $data->end_date
+            ];
+        }
+        JavaScript::put(['specialDay'=>$schedule]);
+        // JavaScript::put([
+        //     'title' => $schedule_data->schedule,
+        //     'start' => $schedule_data->start_date,
+        //     'end' => $schedule_data->end_date
+        // ]);
+
+        // dd($schedule_datas, $data->schedule,$data->start_date,$data->end_date);
 
         return View::make('test');
-
-        // return view('test');
     }
 
     public function create()
@@ -52,24 +75,38 @@ class CalendarController extends Controller
      */
     public function scheduleAdd(Request $request)
     {
-        // バリデーション
-        // $request->validate([
-        //     'start_date' => 'required|integer',
-        //     'end_date' => 'required|integer',
-        //     'schedule' => 'required|max:32',
-        // ]);
-
         // dd($request);
+
+        //バリデーション
+        $validator =  Validator::make($request->all(),[
+            'schedule' => 'required|string|max:35',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        // バリデーションエラー
+        if ($validator->fails()){
+            return redirect()
+                ->route('test.add')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
         // 登録処理
-        // $schedule = new Calendar();
+        $schedules = new Calendar();
         // 日付に変換。JavaScriptのタイムスタンプはミリ秒なので秒に変換
-        // $schedule->start_date = date('Y-m-d', $request->input('start_date') / 1000);
-        // $schedule->end_date = date('Y-m-d', $request->input('end_date') / 1000);
-        // $schedule->schedule = $request->input('schedule');
-        // $schedule->save();
+        // $schedules->start_date = date('Y-m-d', $request->input('start_date') / 1000);
+        // $schedules->end_date = date('Y-m-d', $request->input('end_date') / 1000);
+
+        $schedules->start_date =  $request->input("start_date");
+        $schedules->end_date =  $request->input("end_date");
+        $schedules->schedule = $request->input('schedule');
+        $schedules->user_id = Auth::user()->id ;
+        $schedules->save();
+        // dd($request->input("start_date"));
 
         // return;
-        return view('test');
+        return redirect()->route('test.index');
     }
 
 };

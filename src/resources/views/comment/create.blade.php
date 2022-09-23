@@ -31,7 +31,7 @@
                     <p class="leading-relaxed mb-5 text-gray-600">気になったことや質問、応援など書いてください</p>
 
                     <div class="relative mb-4">
-                        <label for="comment" class="leading-7 text-sm text-gray-600" for="comment">Message</label>
+                        <label for="comment" class="leading-7 text-sm text-gray-600" >Message</label>
                         <textarea id="comment" name="comment" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                     </div>
