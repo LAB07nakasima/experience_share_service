@@ -20,12 +20,14 @@
     <link rel="stylesheet" href="/css/style.css">
     {{--  <link rel=“stylesheet” href=“{{ asset(‘css/create.style.css’) }}“> --}}
     {{-- フルカレンダーの機能？？必要か微妙 --}}
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.3/main.global.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.3/main.global.min.js"></script> --}}
+    <script src='fullcalendar/main.js'></script>
+
     {{-- jsファイルの読み込み --}}
     <script src="{{ asset('js/app.js') }}"></script>
 
     {{-- テスト用だから後で消す --}}
-    <script src="{{ asset('js/calendar.js') }}"></script>
+    {{-- <script src="{{ asset('js/calendar.js') }}"></script> --}}
 
     <script>
 
@@ -37,7 +39,15 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         // $.get("https://holidays-jp.github.io/api/vi/date.json", function(holidayData) {
-        var calendarEl = document.getElementById('calendar');
+        let calendarEl = document.getElementById('calendar');
+
+        // let calendar = new Calendar(calendarEl, {
+            // plugins: [ googleCalendarPlugin ],
+            // googleCalendarApiKey: '<AIzaSyAyQflTd-Y1l0hMjifEC8b3Nkm-U8lRflk>',
+            // events: {
+            //     googleCalendarId: 'nmjdw406@gmail.com'
+            // }
+        // });
 
         let calendar = new FullCalendar.Calendar(calendarEl,
         {
@@ -91,7 +101,7 @@
                 // alert("selected " + info.startStr + " to " + info.endStr);
 
                 // 入力ダイアログ
-                const eventName = prompt("予定を入力してください");
+                // const eventName = prompt("予定を入力してください");
 
                 // if (eventName) {
                 //     // Laravelの登録処理の呼び出し
@@ -168,31 +178,21 @@
         //     },
         // ];
 
+        // specialDayにControllerから渡した配列が入る
         const data = {specialDay: specialDay};
+
+        // console.log(google_schedule);
+        // [{title:''卒制},{start: 2022-10-01},{...}]
 
         // const ary = data.specialDay.map(function(value){
         //     return {title:value.schedule,start:value.start_date,end:value.end_date};
         // })
 
-        console.log(data.specialDay);
-            // eventDates.push(specialDay);
-            return data.specialDay;
+        // console.log(data.specialDay);
+
+        return data.specialDay;
     };
 
-
-    // ライブラリの動作テスト
-    // window.Laravel = {};
-
-
-    $(document).ready(function(){
-
-     console.log(window.title);
-     console.log(window.start);
-     console.log(window.end);
-
- })
-
-    // console.log(Laravel.array);
     </script>
   </head>
   <body>
@@ -204,33 +204,40 @@
         </x-slot>
 
         {{-- ここでcalendarの表示 --}}
-        <div class="" id='calendar'></div>
-        <div class="w-1/2 max-w-xs">
-            <div class="bg-gray-100">
-                <form method="POST" action="{{ route('test.add') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    @csrf
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">予定を入力する</label>
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="schedule"
-                                name="schedule"
-                                {{-- value="{{ old('schedule_title') }}" --}}
-                                type="text">
+        <div class="flex px-6">
 
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">開始日</label>
-                            <input type="date" name="start_date">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">終了日</label>
-                            <input type="date" name="end_date">
-                            {{-- name: フォームの名前  value: 送信される値 --}}
-                            <button type="submit" value="登録">カレンダーに登録</button>
-                    </div>
-                </form>
+            <div class="w-1/4 max-w-xs">
+                <div class="bg-gray-100">
+                    <form method="POST" action="{{ route('test.add') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ml-4">
+                        @csrf
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-xl font-bold mb-2">予定を入力する</label>
+                                <input
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="schedule"
+                                    name="schedule"
+                                    {{-- value="{{ old('schedule_title') }}" --}}
+                                    type="text"
+                                    placeholder="ここに予定を入れてください">
+
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">開始日</label>
+                                <input type="date" name="start_date">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">終了日</label>
+                                <input type="date" name="end_date">
+                                {{-- name: フォームの名前  value: 送信される値 --}}
+                                <button type="submit" value="登録">カレンダーに登録</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+            <div class="bg-white-400 w-3/4">
+                <div class="" id='calendar'></div>
+            </div>
+
         @include ('footer')
+        </div>
     </x-app-layout>
   </body>
 </html>

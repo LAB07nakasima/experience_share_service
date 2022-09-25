@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('user/{user}/follow',[FollowUserController::class, 'store'])->name('follow');
     Route::post('user/{user}/unfollow',[FollowUserController::class, 'destroy'])->name('unfollow');
 
+    // Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+
 });
 
 // カレンダー機能
@@ -74,3 +76,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+// Route::middleware('auth')->group(function () {
+    // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    //     ->name('logout');
+// });

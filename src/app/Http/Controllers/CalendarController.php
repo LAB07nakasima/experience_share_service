@@ -25,47 +25,57 @@ class CalendarController extends Controller
 
         // return View::make('test');
 
+        // ログインしているユーザーのカレンダーのデータを取得する
         $user = Auth::user();
+        // リレーションのcalendars()で取得 $user->で取れるのは、UserモデルがAuth継承してるから
+        // array_map関数でも可 使い方は.map()とほぼ一緒
         $user_calender = $user->calenders()->get();
         $schedule =[];
-        
-         foreach($user_calender as $data){
+        //foreach（）は処理を繰り返す
+        foreach($user_calender as $data){
             $schedule[]=[
                     'title' => $data->schedule,
                     'start' => $data->start_date,
                     'end' => $data->end_date
             ];
         }
-        JavaScript::put(['specialDay'=>$schedule]);
+
+        $google_schedule = [];
+        foreach($user_calender as $gs){
+            $google_schedule[] = [
+                'title' => $gs->schedule,
+                'start_date' => $gs->start_date,
+                'end_date' => $gs->end_date
+            ];
+        }
+        // dd($google_schedule);
+
+
+
+
+        // Javascriptにデータを渡す 'specialDay' => arrayデータ
+        JavaScript::put(['specialDay'=>$schedule],['googleUrl' => $google_schedule]);
+
         // JavaScript::put([
         //     'title' => $schedule_data->schedule,
         //     'start' => $schedule_data->start_date,
         //     'end' => $schedule_data->end_date
         // ]);
 
-        // dd($schedule_datas, $data->schedule,$data->start_date,$data->end_date);
-
         return View::make('test');
     }
 
     public function create()
     {
+
         // JavaScript::put([
-        //     'title' => '卒業式',
-        //     'start' => '開始日',
-        //     'end' => '終了日'
+        //     'foo' => 'bar',
+        //     'user' => User::first(),
+        //     'age' => 29
         // ]);
 
         // return View::make('hello');
 
-        JavaScript::put([
-            'foo' => 'bar',
-            'user' => User::first(),
-            'age' => 29
-        ]);
-
-        return View::make('hello');
-        // return redirect('/');
     }
 
     /**

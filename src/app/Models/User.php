@@ -57,6 +57,7 @@ class User extends Authenticatable
       return $this->belongsToMany(self::class, "follows_user", "following_user_id", "followed_user_id")->withTimestamps();
     }
 
+    // カレンダーとの１対多
     function calenders(){
         return $this->hasMany(Calendar::class);
     }
