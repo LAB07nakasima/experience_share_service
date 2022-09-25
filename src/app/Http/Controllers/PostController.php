@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -20,7 +22,13 @@ class PostController extends Controller
         // $posts = [];
         $posts = Post::getAllOrderByUpdated_at();
         // dd($posts);
-        return view('post.index',compact('posts'));
+
+        return view('post.index',compact('posts'),
+
+        // ×ペジネーションをつけたい
+        [
+            'posts' => DB::table('posts')->paginate(6)
+        ]);
     }
 
     /**
@@ -75,7 +83,14 @@ class PostController extends Controller
     {
         // IDを指定して１件のデータを取得 postという名前でshow.bladeに渡す
         $post = Post::find($id);
-        return view('post.show', compact('post'));
+
+        // commentのデータも必要なので取ってくる
+        // 取ってきた$idとpost_idカラムで一致したレコードを取得
+        $comments = Comment::where('comment_post_id' , $id)
+            ->get();
+
+        // dd($comments);
+        return view('post.show', compact('post', 'id', 'comments'));
     }
 
     /**

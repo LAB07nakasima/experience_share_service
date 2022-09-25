@@ -195,6 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+        // 'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider'
     ],
 
     /*
@@ -210,6 +212,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'JavaScript' => Laracasts\Utilities\JavaScript::class,
     ])->toArray(),
 
 ];

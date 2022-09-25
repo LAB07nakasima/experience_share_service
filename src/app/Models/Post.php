@@ -30,4 +30,16 @@ class Post extends Model
         // １対多の1と繋げてる
         return $this->belongsTo(User::class);
     }
+
+    // いいね機能
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    // コメント
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

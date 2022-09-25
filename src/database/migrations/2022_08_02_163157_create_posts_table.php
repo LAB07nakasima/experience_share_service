@@ -21,19 +21,21 @@ return new class extends Migration
             $table->timestamps();
 
             // 外部キーの設定
-            $table->foreign('user_id')->references('id')->on('users')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-        });
-
-        Schema::table('posts', function (Blueprint $table){
             $table->foreign('user_id')
-            ->after('id')
-            ->nullable()
-            ->constrained('users')
-            ->cascadeOnDelete();
-
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
+
+        // Schema::table('posts', function (Blueprint $table){
+        //     $table->foreign('user_id')
+        //     ->after('id')
+        //     ->nullable()
+        //     ->constrained('users')
+        //     ->cascadeOnDelete();
+
+        // });
     }
 
     /**

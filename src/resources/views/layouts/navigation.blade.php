@@ -16,6 +16,44 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">
+                        {{ __('投稿一覧') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">
+                        {{ __('投稿作成') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('mypage.index')" :active="request()->routeIs('mypage.index')">
+                        {{ __('マイページ') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('test.index')" :active="request()->routeIs('test.index')">
+                        {{ __('カレンダー') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href=" route('logout') " :active="request()->routeIs('logout')">
+                        {{ __('LogOut') }}
+                    </x-nav-link>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
@@ -67,26 +105,71 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+        <!-- 投稿一覧ページ -->
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">
+            {{ __('投稿一覧') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <!-- 投稿作成ページ -->
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">
+            {{ __('投稿作成') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <!-- マイページ -->
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('mypage.index')" :active="request()->routeIs('mypage.index')">
+            {{ __('マイページ') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <!-- スケジュール -->
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('test.index')" :active="request()->routeIs('test.index')">
+            {{ __('カレンダー') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+            this.closest('form').submit();">
+                {{ __('Logout') }}
+            </x-responsive-nav-link>
+        </form>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            <div class="flex items-center px-4">
+                <div class="flex-shrink-0">
+                    <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </div>
+
+                <div class="ml-3">
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
             </div>
 
             <div class="mt-3 space-y-1">
-                <!-- Authentication -->
+            <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                        {{ __('Logout') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
         </div>
     </div>
 </nav>
+
+

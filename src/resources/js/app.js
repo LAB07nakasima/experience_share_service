@@ -1,7 +1,11 @@
 import './bootstrap';
-
+import '../css/app.css';
 import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+window.axios = require("axios");
+require("./calendar");
 
-Alpine.start();
+// window.Alpine = Alpine;
+// Alpine.start();
+
+
