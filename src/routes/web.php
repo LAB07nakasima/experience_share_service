@@ -52,6 +52,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/toppage', function () {
+    return view('toppage');
+});
 
 // Route::resource('/comment', 'CommentController',['only' => ['store']]);
 
