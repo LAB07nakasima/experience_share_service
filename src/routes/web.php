@@ -51,20 +51,20 @@ Route::group(['middleware' => 'auth'], function (){
 Route::get('/test',[CalendarController::class, 'index'])->name('test.index');
 Route::post('/test',[CalendarController::class, 'scheduleAdd'])->name('test.add');
 
-
 Route::resource('/mypage', UserController::class);
 
+// 最初のページ
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
-
-Route::get('/toppage', function () {
-    return view('toppage');
-});
-
-// Route::resource('/comment', 'CommentController',['only' => ['store']]);
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
+// Route::get('/toppage', function () {
+//     return view('toppage');
+// });
 
 // コメントのRoute
 // コメントの投稿処理
@@ -79,13 +79,20 @@ Route::post('/comment/store', [CommentController::class,'store'])->name('comment
 // コメント削除処理
 Route::post('/comment/{comment_id}', [CommentController::class,'destroy'])->name('comment.destroy');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+// トップページ
+Route::get('post', function () {
+    return view('post.index');
+})->middleware(['auth'])->name('post.index');
 require __DIR__.'/auth.php';
 
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+// require __DIR__.'/auth.php';
+
+
+// ログアウト
 // Route::middleware('auth')->group(function () {
     // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     //     ->name('logout');
