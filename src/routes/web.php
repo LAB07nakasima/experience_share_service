@@ -21,10 +21,16 @@ use App\Http\Controllers\CalendarController;
 */
 
 Route::group(['middleware' => 'auth'], function (){
+
+    // 後で消すルート
+    Route::get('post',[PostController::class, 'index'])->name('post.index');
+
     Route::get('post/create',[PostController::class, 'store'])->name('post.create');
     Route::get('post/{post}', [PostController::class, 'show'])->name('post.show');
 
     Route::resource('post', PostController::class);
+
+
 
     Route::post('post/{post}/favorites', [FavoriteController::class, 'store'])->name('favorites');
     Route::post('post/{post}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');

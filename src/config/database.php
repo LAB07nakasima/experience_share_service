@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1','localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel-product-db'),
+            'database' => env('DB_DATABASE', 'laravel-product-db', 'root'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', 'root', 'nakashiMa123*'),//修正
             'unix_socket' => env('DB_SOCKET', ''),

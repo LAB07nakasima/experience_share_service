@@ -23,12 +23,12 @@ class PostController extends Controller
         $posts = Post::getAllOrderByUpdated_at();
         // dd($posts);
 
-        return view('post.index',compact('posts'),
+        return view('post.index' ,compact('posts'));
 
-        // ×ペジネーションをつけたい
-        [
-            'posts' => DB::table('posts')->paginate(6)
-        ]);
+        // // ×ペジネーションをつけたい
+        // [
+        //     'posts' => DB::table('posts')->paginate(6)
+        // ]);
     }
 
     /**

@@ -30,15 +30,6 @@ class CalendarController extends Controller
         // リレーションのcalendars()で取得 $user->で取れるのは、UserモデルがAuth継承してるから
         // array_map関数でも可 使い方は.map()とほぼ一緒
         $user_calender = $user->calenders()->get();
-        $schedule =[];
-        //foreach（）は処理を繰り返す
-        foreach($user_calender as $data){
-            $schedule[]=[
-                    'title' => $data->schedule,
-                    'start' => $data->start_date,
-                    'end' => $data->end_date
-            ];
-        }
 
         $google_schedule = [];
         foreach($user_calender as $gs){
@@ -48,33 +39,60 @@ class CalendarController extends Controller
                 'end_date' => $gs->end_date
             ];
         }
-        // dd($google_schedule);
+
+        $google_url = [];
+        foreach ($google_schedule as $data) {
+        $url = [ "http://www.google.com/calendar/event?"
+            ."action="  ."TEMPLATE"
+            ."&text="   .$data["title"]
+            ."&dates"   .$data["start_date"]. "/" . $data["end_date"]
+        ];
+        // dd($url);
+        array_push($google_url, $url);
+        };
+
+        // $schedule =[];
+        //foreach（）は処理を繰り返す
+        // foreach($user_calender as $data){
+        //     $schedule[]=[
+        //             'title' => $data->schedule,
+        //             'start' => $data->start_date,
+        //             'end' => $data->end_date ,
+        //             'description' => $url
+        //     ];
+        // }
 
 
-
+        // テスっと
+        $schedule =[];
+        //foreach（）は処理を繰り返す
+        foreach($user_calender as $data){
+            $url =  "http://www.google.com/calendar/event?"
+            ."action="  ."TEMPLATE"
+            ."&text="   .$data->schedule
+            ."&dates="  .str_replace('-','', $data->start_date) . '/' . str_replace('-','', $data->end_date);
+            // 20151026T100000
+            $schedule[]=[
+                    'title' => $data->schedule,
+                    'start' => $data->start_date,
+                    'end' => $data->end_date ,
+                    // 'description' => $url ,
+                    'details' => $url
+            ];
+        }
+        // dd($schedule);
 
         // Javascriptにデータを渡す 'specialDay' => arrayデータ
-        JavaScript::put(['specialDay'=>$schedule],['googleUrl' => $google_schedule]);
-
-        // JavaScript::put([
-        //     'title' => $schedule_data->schedule,
-        //     'start' => $schedule_data->start_date,
-        //     'end' => $schedule_data->end_date
-        // ]);
+        JavaScript::put([
+            'specialDay'=>$schedule ,
+            // 'googleUrl' => $google_url
+        ]);
 
         return View::make('test');
     }
 
     public function create()
     {
-
-        // JavaScript::put([
-        //     'foo' => 'bar',
-        //     'user' => User::first(),
-        //     'age' => 29
-        // ]);
-
-        // return View::make('hello');
 
     }
 
