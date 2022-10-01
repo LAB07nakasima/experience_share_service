@@ -80,16 +80,16 @@ Route::post('/comment/store', [CommentController::class,'store'])->name('comment
 Route::post('/comment/{comment_id}', [CommentController::class,'destroy'])->name('comment.destroy');
 
 // トップページ
-Route::get('post', function () {
-    return view('post.index');
-})->middleware(['auth'])->name('post.index');
-require __DIR__.'/auth.php';
-
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+// Route::get('post', function () {
+//     return view('post.index');
+// })->middleware(['auth'])->name('post.index');
 // require __DIR__.'/auth.php';
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+require __DIR__.'/auth.php';
 
 
 // ログアウト
