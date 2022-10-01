@@ -219,9 +219,12 @@
 
                     @foreach ($comments as $comment)
                     <div class="ml-8 mb-8">
-                        <p class="text-sm font-sant" id="contents"> {{ $comment->name }}名前を入れたい </p>
-                        {{-- {{ $comment->comment_user_id->name }} --}}
-                        <p class="pb-6 font-sant" id="contents"> {{ $comment->comment }} </p>
+                        <p class="text-sm font-sant" id="contents">
+                            {{ $comment->name }}
+                        </p>
+                        <p class="pb-6 font-sant" id="contents">
+                            {{ $comment->comment }}
+                        </p>
 
                         @if ($comment->comment_user_id == Auth::id())
                             <form action="{{ route('comment.destroy', ['comment_id' => $comment->id]) }}" method="POST" class="">
