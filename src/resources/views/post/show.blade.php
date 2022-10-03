@@ -6,72 +6,6 @@
     </x-slot>
 
     <div class="py-12">
-    {{--<div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
-          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white border-b border-gray-200">
-              <div class="mb-6">
-                <div class="flex flex-col mb-4">
-                    <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">タイトル</p>
-                    <p class="py-2 px-3 text-grey-darkest" id="title">
-                        {{$post->title}}
-                    </p>
-                </div>
-                <div class="flex flex-col mb-4">
-                    <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">内容</p>
-                    <p class="py-2 px-3 text-grey-darkest" id="contents">
-                        {{$post->contents}}
-                    </p>
-                </div>
-
-                <div>
-                @foreach ($comments as $comment)
-                    <div class="mb-2">
-                        <div class="flex flex-col mb-4">
-                            <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">コメント</p>
-                            <p class="py-2 px-3 text-grey-darkest" id="contents">
-                                {{ $comment->comment }}
-                            </p>
-                        </div> --}}
-
-                        {{-- @if ($comment->comment_user_id == Auth::id())
-                            <form action="{{ route('comment.destroy', ['comment_id' => $comment->id]) }}" method="POST">
-                                @csrf --}}
-                                {{-- <button class="submit">削除</button>
-                                <input type="hidden" name="post_id" value="{{ $id }}">
-                            </form>
-                        @endif
-                    </div>
-                @endforeach
-                </div>
-
-                    <form action="{{ route('comment.store') }}" method="POST">
-                        @csrf
-                        <div class="px-5 py-24 mx-auto flex justify-center">
-                            <div class="lg:w-full md:w-full bg-white rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0 shadow-md">
-                                <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">コメントする</h2>
-                                <p class="leading-relaxed mb-5 text-gray-600">気になったことや質問、応援など書いてください</p>
-
-                                <div class="relative mb-4">
-                                    <label for="comment" class="leading-7 text-sm text-gray-600" for="comment">Message</label>
-                                    <textarea id="comment" name="comment" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
-                                    <input type="hidden" name="post_id" value="{{ $id }}">
-                                </div>
-                                    <button type="submit" class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">送信
-                                    </button> --}}
-                            {{-- </div>
-                        </div>
-                    </form>
-
-
-
-                    <a href="{{ route('post.index') }}" class="block text-center w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
-                    Back
-                    </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> --}}
 
 {{-- tailwind テスト --}}
       <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -253,12 +187,23 @@
                             <textarea id="comment" name="comment" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                             <input type="hidden" name="post_id" value="{{ $id }}">
                         </div>
+
                             <button type="submit" class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">送信
                             </button>
                             {{-- <a class="block text-center w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none" href="/post/{{ $post->id }}">投稿に戻る</a> --}}
                     </div>
                 </div>
             </form>
+
+            <!--Divider(区切り)-->
+            <hr class="border-b-2 border-gray-400 mb-8 mx-4">
+            <div class="h-screen  flex justify-center items-center mb-8">
+                <a href="{{ route('post.index') }}">
+                    {{-- <button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">戻る</button> --}}
+                    <button class="mx-auto bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">投稿一覧に戻る
+                    </button>
+                </a>
+            </div>
 
             <!--Divider(区切り)-->
             <hr class="border-b-2 border-gray-400 mb-8 mx-4">
