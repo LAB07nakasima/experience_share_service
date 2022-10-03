@@ -57,12 +57,12 @@ class CommentController extends Controller
 
         $comments = DB::table('comments')
             ->select('comments.*', 'users.name')
-            ->join('users','comments.comment_user_id', 'users.id')
+            ->join('users','comments.comment_user_id', '=' , 'users.id')
             ->where('comment_post_id', $post_id)
             ->get()
             ->toArray();
 
-        // dd($comments);
+        dd($comments);
 
         //post情報の取得をしてviewに返す
         $post = Post::where('id', $post_id )
@@ -156,7 +156,6 @@ class CommentController extends Controller
         $post_id = $request->input('post_id');
 
         // $this_post_id = DB::table('comments')
-        //
         //     ->select('comments.*', 'users.name')
         //     ->join('users','comments.user_id', 'users.id')
         //     ->where('id', $comment_id)
