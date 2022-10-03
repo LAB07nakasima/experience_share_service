@@ -177,9 +177,9 @@
 
             <form action="{{ route('comment.store') }}" method="POST">
                 @csrf
-                <div class="px-5 py-8 mx-auto flex justify-center">
-                    <div class="lg:w-full md:w-full p-8 flex flex-col w-full mt-10 md:mt-0">
-                        <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">コメントする</h2>
+                <div class="px-5 py-5 mx-auto flex justify-center">
+                    <div class="lg:w-full md:w-full p-8 flex flex-col w-full mt-2 md:mt-0">
+                        <h2 class="text-gray-900 text-xl mb-1 font-medium title-font font-semibold">コメントする</h2>
                         <p class="leading-relaxed mb-5 text-gray-600">気になったことや質問、応援など書いてください</p>
 
                         <div class="relative mb-4">
