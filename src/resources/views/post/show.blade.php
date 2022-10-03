@@ -197,7 +197,7 @@
 
             <!--Divider(区切り)-->
             <hr class="border-b-2 border-gray-400 mb-8 mx-4">
-            <div class="h-screen  flex justify-center items-center mb-8">
+            <div class="flex justify-center items-center mb-8">
                 <a href="{{ route('post.index') }}">
                     {{-- <button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">戻る</button> --}}
                     <button class="mx-auto bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">投稿一覧に戻る
