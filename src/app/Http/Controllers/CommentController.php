@@ -62,7 +62,7 @@ class CommentController extends Controller
             ->get()
             ->toArray();
 
-        dd($comments);
+        // dd($comments);
 
         //post情報の取得をしてviewに返す
         $post = Post::where('id', $post_id )

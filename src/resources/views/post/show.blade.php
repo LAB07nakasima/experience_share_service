@@ -67,7 +67,7 @@
 
 
                 <!--Lead Para-->
-                <p class="py-8 font-sans">
+                <p class="py-8 font-sans whitespace-pre-line ">
                     {{$post->contents}}
                 </p>
 
@@ -99,9 +99,11 @@
             </div>
 
             <!--Tags -->
-            <div class="text-base md:text-sm text-gray-500 px-4 py-6">
-                Tags: 多分ここにカテゴリー表示をさせます <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a> . <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a>
+            <div class="text-base md:text-sm text-gray-700 px-8 py-6">
+                Tags: 多分ここにカテゴリー表示をさせます <br>
+                <a class="link link-accent no-underline hover:underline"> simple link</a>
             </div>
+
 
             <!--Divider-->
             <hr class="border-b-2 border-gray-400 mb-8 mx-4">
@@ -156,7 +158,7 @@
                         <p class="text-sm font-sant" id="contents">
                             {{ $comment->name }}
                         </p>
-                        <p class="pb-6 font-sant" id="contents">
+                        <p class="pb-6 font-sant whitespace-pre-line " id="contents">
                             {{ $comment->comment }}
                         </p>
 

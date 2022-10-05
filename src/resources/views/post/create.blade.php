@@ -36,13 +36,22 @@
                                             <label for="contents" class="leading-7 text-sm text-gray-600">投稿内容</label>
                                             <textarea id="contents" rows="10" name="contents" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                                         </div>
+
+                                        <label for="contents" class="leading-7 text-sm text-gray-600">URL</label>
+                                        <input type="text" id="url" class=" form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" name="url" placeholder="URLを入力できます">
+
+                                        <p class="leading-7 text-sm text-gray-600 pt-4 ">画像を挿入できます</p>
+                                        <input id="image" type="file" name="image">
                                     </div>
-                                    <div class="p-2 w-full">
+
+                                    {{-- <input id="image" type="file" name="image"> --}}
+
+                                    <div class="p-8 w-full">
                                         <button class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">送信</button>
                                     </div>
 
                                 <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
-                                    <p class="leading-normal my-5">プロダクト名入れる
+                                    <p class="leading-normal my-5">tumgi
                                     {{-- <br>Saint Cloud, MN 56301 --}}
                                     </p>
                                     <span class="inline-flex">
