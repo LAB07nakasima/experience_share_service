@@ -23,6 +23,7 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,6 +37,7 @@ class CommentController extends Controller
         // return redirect('/');
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -62,7 +64,7 @@ class CommentController extends Controller
             ->get()
             ->toArray();
 
-        dd($comments);
+        // dd($comments);
 
         //post情報の取得をしてviewに返す
         $post = Post::where('id', $post_id )
@@ -80,6 +82,7 @@ class CommentController extends Controller
 
         // return redirect()->route('comment.show', ['post' => $post_id]);
     }
+
 
     /**
      * Display the specified resource.
@@ -116,6 +119,7 @@ class CommentController extends Controller
         //     ->first();
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -126,6 +130,7 @@ class CommentController extends Controller
     {
         //
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -138,6 +143,7 @@ class CommentController extends Controller
     {
         //
     }
+
 
     /**
      * Remove the specified resource from storage.

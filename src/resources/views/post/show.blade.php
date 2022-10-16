@@ -48,7 +48,7 @@
         </nav> --}}
 
         <!--Container-->
-        <div class="container w-full md:max-w-3xl mx-auto pt-20 bg-white rounded-lg">
+        <div class="container w-full md:max-w-4xl mx-auto pt-20 bg-white rounded-lg">
 
             <div class="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal" style="font-family:Georgia,serif;">
 
@@ -67,7 +67,7 @@
 
 
                 <!--Lead Para-->
-                <p class="py-8 font-sans">
+                <p class="py-8 font-sans whitespace-pre-line">
                     {{$post->contents}}
                 </p>
 
@@ -80,7 +80,9 @@
                 </ol> --}}
 
                 {{-- 引用 --}}
-                <blockquote class="border-l-4 border-green-500 italic my-8 pl-8 md:pl-12">ここに画像を入れられるように機能を作ります</blockquote>
+                <blockquote class="border-l-4 border-green-500 italic my-8 pl-8 md:pl-12 font-sans">
+                    <img src="{{ asset($post->image) }}" class="w-20 h-auto">
+                </blockquote>
 
                 {{-- <p class="py-6">Example code block:</p>
                 <pre class="bg-gray-900 rounded text-white font-mono text-base p-2 md:p-4">
@@ -100,12 +102,14 @@
 
             <!--Tags -->
             <div class="text-base md:text-sm text-gray-500 px-4 py-6">
-                Tags: 多分ここにカテゴリー表示をさせます <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a> . <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a>
+                Tags: 多分ここにカテゴリー表示をさせます
+                <br>
+                 <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link: {{ $post->url }} </a> .
+                {{-- <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a> --}}
             </div>
 
             <!--Divider-->
             <hr class="border-b-2 border-gray-400 mb-8 mx-4">
-
 
             <!--Subscribe-->
             {{-- <div class="container px-4">
@@ -132,11 +136,11 @@
                 <img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of Author">
                 <div class="flex-1 px-2">
                     <p class="text-base font-bold text-base md:text-xl leading-none mb-2">{{ $post->user->name }}</p>
-                    <p class="text-gray-600 text-xs md:text-base">Minimal Blog Tailwind CSS template by <a class="text-green-500 no-underline hover:underline" href="https://www.tailwindtoolbox.com">TailwindToolbox.com</a></p>
+                    <p class="text-gray-600 text-xs md:text-base">プログラミングスクールに通ってます</p>
                 </div>
                 <div class="justify-end">
                     <a href="{{ route('post.index') }}">
-                    <button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">戻る</button>
+                    <button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">ユーザーページ</button>
                     </a>
                 </div>
             </div>

@@ -110,15 +110,17 @@
             // },
 
             // イベントを押すとモーダルウィンドウが開く
-            eventClick: function (info) {
-                alert('Event: ' + info.event.title + '\n' + 'URL :' + info.event.extendedProps.details )
+            // eventClick: function (info) {
+            //     alert('Event: ' + info.event.title + '\n' + 'URL :' + info.event.extendedProps.details )
                 // showEventDialog(info.event.title, info.event.extendedProps.details);
-                console.log(info.event.extendedProps.details);
+            //     console.log(info.event.extendedProps.details);
+            // }
 
-                // モーダルウィンドウテスト
-                // if (info.el.classList.contains("fc-h-event")) {
-                //     showEventDialog(info.event._def); // モーダルウィンドウの関数
-                // }
+            eventClick: function (info) {
+                if (info.el.classList.contains("fc-h-event")) {
+                showEventDialog(info.event.title, info.event.extendedProps.details); // モーダルウィンドウの関数
+                }
+
 
                 // var info_data = '<a href="javascript:void(0);" class="close" onclick="return closeArea();">[close]</a><br>';
                 // info_data += '<b>タイトル</b><br>\n';
@@ -140,10 +142,10 @@
         calendar.render();
     });
 
-    function showEventDialog(title,details) {
-        // alert('Event: ' + title + '\n' + 'URL :' + details )
+    // function showEventDialog(title,details) {
+    //     // alert('Event: ' + title + '\n' + 'URL :' + details )
 
-    }
+    // }
 
     // 予定の取得
     function getEventDates() {
@@ -202,6 +204,19 @@
             </div>
             <div class="bg-white-400 w-3/4">
                 <div class="" id='calendar'></div>
+            </div>
+
+            <div class="modal-open">モーダルを開く</div>
+            <!-- モーダル本体 -->
+            <div class="modal-container">
+                <div class="modal-body">
+                    <!-- 閉じるボタン -->
+                    <div class="modal-close">×</div>
+                    <!-- モーダル内のコンテンツ -->
+                    <div class="modal-content">
+                        <p>文章が入ります。</p>
+                    </div>
+                </div>
             </div>
 
         @include ('footer')

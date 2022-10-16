@@ -18,9 +18,9 @@
                                 @foreach ($posts as $post)
                                     <div class="py-8 flex flex-wrap md:flex-nowrap">
                                         <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                                            <span class="font-semibold title-font text-gray-600">カテゴリー
-                                            </span>
-                                            {{-- <span class="mt-1 text-gray-600">
+                                            {{-- <span class="font-semibold title-font text-gray-600">カテゴリー
+                                            </span> --}}
+                                            {{-- <spdn class="mt-1 text-gray-600">
                                                 {{ $post->created_at }}
                                             </span> --}}
                                             <span class="mt-4 text-gray-600">

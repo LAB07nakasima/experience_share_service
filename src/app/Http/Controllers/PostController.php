@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +32,7 @@ class PostController extends Controller
         // ]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,6 +43,7 @@ class PostController extends Controller
 
         return view('post.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -64,14 +67,43 @@ class PostController extends Controller
         }
 
         // create()は最初から用意されている関数で戻り値は挿入されたレコードの情報
-        $data = $request->merge(['user_id' => Auth::user()->id])->all();
+        // $data = $request->merge(['user_id' => Auth::user()->id])->all();
+        // $result = Post::create($data);
+        // $posts = Post::getAllOrderByUpdated_at();
 
-        $result = Post::create($data);
-        $posts = Post::getAllOrderByUpdated_at();
+        // dd($request->image);
+
+        // 画像の保存
+        $posts = new Post();
+        $posts->title = $request->title;
+        $posts->contents = $request->contents;
+        $posts->user_id = auth()->user()->id;
+        $posts->url = $request->url;
+        $posts->image = $request->image;
+        if(request('image')){
+            $original = request()->file('image')->getClientOriginalName();
+            $name = date('Ymd_His').'_'.$original;
+            $path = request()->file('image')->move('storage/images', $name);
+            $posts->image=$path;
+        }
         // dd($posts);
+        $posts -> save();
+
+        // ディレクトリ名
+        // $dir = 'sample' ;
+        //アップロードされたファイル名を取得
+        // $file_name = $request->file('image');
+        //sampleディレクトリに画像を保存
+        // $request->file('image')->store('public/' . $dir, $file_name);
+        //ファイル情報をDBに保存
+        // $image = new Post();
+        // $image->image = 'storage/' . $dir . '/' . $file_name;
+        // $image->save();
+
         // ルーティング[post.index]にリクエスト送信
-        return redirect()->route('post.index', compact('posts'));
+        return redirect()->route('post.index', compact('posts'))->with('message','投稿を作成しました');
     }
+
 
     /**
      * Display the specified resource.
@@ -89,9 +121,9 @@ class PostController extends Controller
         $comments = Comment::where('comment_post_id' , $id)
             ->get();
 
-        // dd($comments);
         return view('post.show', compact('post', 'id', 'comments'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -104,6 +136,7 @@ class PostController extends Controller
         $post = Post::find($id);
         return view('post.edit', compact('post'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -131,6 +164,7 @@ class PostController extends Controller
         $result = Post::find($id)->update($request->all());
         return redirect()->route('post.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
